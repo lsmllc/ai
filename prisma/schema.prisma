@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Property {
+  id                     String   @id @default(cuid())
+  title                  String
+  listingUrl             String?
+  municipality           String
+  askingPriceCad         Int
+  bedrooms               Int
+  bathrooms              Float
+  maxGuests              Int
+  interiorSqft           Int
+  lotSqft                Int
+  distanceToSkiKm        Float
+  distanceToVillageKm    Float
+  bikeAccessScore        Int
+  conditionScore         Int
+  rentalRevenuePotential Int
+  listingText            String
+  notes                  String?
+  totalScore             Int
+  scoreBreakdown         Json
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  @@index([totalScore])
+  @@index([askingPriceCad])
+  @@index([municipality])
+}
